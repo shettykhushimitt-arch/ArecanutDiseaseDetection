@@ -1,0 +1,61 @@
+CREATE DATABASE arecanutdb;
+
+use arecanutdb;
+
+INSERT INTO mainapp_diseaseinformation
+(disease_name, symptoms, causes, prevention, treatment)
+VALUES
+
+('Healthy_Leaf',
+'Fresh green leaves with normal appearance. No yellowing or spots.',
+'Healthy plant with proper nutrition and management.',
+'Maintain balanced fertilization, irrigation and regular monitoring.',
+'No treatment required. Continue good agricultural practices.'),
+
+('Healthy_Foot',
+'Healthy stem base without cracks, rot or infection.',
+'Healthy plant.',
+'Maintain proper drainage and keep the plantation clean.',
+'No treatment required.'),
+
+('Healthy_Nut',
+'Healthy green nuts without holes or discoloration.',
+'Healthy crop growth.',
+'Regular nutrient management and pest monitoring.',
+'No treatment required.'),
+
+('Healthy_Trunk',
+'Smooth trunk without bleeding or cracks.',
+'Healthy plant.',
+'Provide proper irrigation and avoid mechanical injuries.',
+'No treatment required.'),
+
+('Bud_Borer',
+'Holes in spindle leaves, damaged buds, drying of central shoot and reduced growth.',
+'Attack by bud borer larvae.',
+'Remove affected shoots, maintain field sanitation and monitor regularly.',
+'Apply recommended insecticides as advised by agricultural experts and remove heavily infested plant parts.'),
+
+('Mahali_Koleroga',
+'Black lesions, fruit rot, flower drop and infection during the rainy season.',
+'Fungal infection caused by Phytophthora arecae.',
+'Improve drainage, avoid excess moisture and remove infected plant material.',
+'Apply recommended fungicides and Bordeaux mixture before the monsoon season.'),
+
+('Stem_Bleeding',
+'Dark brown liquid oozing from trunk, bark cracking and weak stem.',
+'Fungal infection.',
+'Avoid trunk injuries, improve drainage and inspect plantations regularly.',
+'Remove infected bark and apply appropriate fungicidal paste as recommended.'),
+
+('Stem_Cracking',
+'Long cracks on stem, dry bark and weak trunk.',
+'Environmental stress, nutrient deficiency or physical injury.',
+'Balanced fertilizer application, proper irrigation and avoid mechanical damage.',
+'Improve soil nutrition, manage irrigation and monitor plant recovery.'),
+
+('Yellow_Leaf_Disease',
+'Yellowing leaves, reduced leaf size, slow growth, drying leaves and low yield.',
+'Phytoplasma infection, nutrient imbalance and poor soil health.',
+'Use healthy seedlings, maintain proper nutrition and remove severely affected palms.',
+'No complete cure for severe infection. Improve nutrient management and remove severely infected plants.');

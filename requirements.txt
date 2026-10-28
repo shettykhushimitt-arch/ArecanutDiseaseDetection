@@ -1,0 +1,8 @@
+Django>=5.2,<6.0
+mysqlclient>=2.2
+ultralytics>=8.3
+opencv-python>=4.10
+numpy>=1.26
+Pillow>=10.0
+gunicorn>=23.0
+whitenoise>=6.7

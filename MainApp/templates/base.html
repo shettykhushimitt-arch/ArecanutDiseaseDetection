@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI-powered arecanut disease detection for healthier plantations.">
+  <title>{% block title %}ArecaCare{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="brand" href="{% url 'index' %}" aria-label="ArecaCare home">
+        <span class="brand-mark">✦</span><span>Areca<span>Care</span></span>
+      </a>
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+      <nav class="site-nav">
+        {% if request.session.user_id %}
+          <a href="{% url 'dashboard' %}">Dashboard</a>
+          <a href="{% url 'upload' %}">New scan</a>
+          <a href="{% url 'live_scan' %}">Live scan</a>
+          <a href="{% url 'history' %}">History</a>
+          <a class="nav-user" href="{% url 'logout' %}">Sign out <span>↗</span></a>
+        {% else %}
+          <a href="{% url 'index' %}#how-it-works">How it works</a>
+          <a href="{% url 'index' %}#diseases">What we detect</a>
+          <a href="{% url 'login' %}">Sign in</a>
+          <a class="button button-small" href="{% url 'register' %}">Get started</a>
+        {% endif %}
+      </nav>
+    </div>
+  </header>
+  <main>{% block content %}{% endblock %}</main>
+  <footer class="site-footer">
+    <div class="container footer-wrap">
+      <a class="brand" href="{% url 'index' %}"><span class="brand-mark">✦</span><span>Areca<span>Care</span></span></a>
+      <p>Smarter plant care, from palm to harvest.</p>
+      <p>© {% now "Y" %} ArecaCare</p>
+    </div>
+  </footer>
+  <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>

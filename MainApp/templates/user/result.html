@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Scan result | ArecaCare{% endblock %}
+{% block content %}
+<section class="app-page">
+  <div class="container">
+    <div class="page-heading compact">
+      <div>
+        <a class="back-link" href="{% url 'history' %}">← Back to history</a>
+        <p class="eyebrow">Scan result</p>
+        <h1>Here’s what we found.</h1>
+        <p>Scanned {{ prediction.prediction_date|date:'d M Y, g:i A' }}</p>
+      </div>
+      <a class="button button-outline" href="{% url 'upload' %}">Scan another plant</a>
+    </div>
+
+    <div class="result-summary">
+      <div class="result-name">
+        <span class="result-symbol">{% if prediction.is_healthy %}✦{% else %}!{% endif %}</span>
+        <div>
+          <p>{% if prediction.is_no_detection %}Detection status{% else %}Detected condition{% endif %}</p>
+          <h2>{{ prediction.disease_display }}</h2>
+        </div>
+      </div>
+      <div class="result-score">
+        <p>AI confidence</p>
+        {% if prediction.confidence is not None %}
+          <strong>{{ prediction.confidence|floatformat:1 }}<small>%</small></strong>
+        {% else %}
+          <strong>--</strong>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if prediction.is_no_detection %}
+      <div class="alert no-detection-alert">No reliable plant condition was found in this image. Try a close, bright, focused image of one arecanut plant area.</div>
+    {% endif %}
+
+    <div class="image-comparison">
+      <figure>
+        <figcaption>Original image</figcaption>
+        {% if prediction.uploaded_image %}<img src="{{ prediction.uploaded_image.url }}" alt="Original uploaded plant">{% endif %}
+      </figure>
+      <figure>
+        <figcaption>AI detection</figcaption>
+        {% if prediction.predicted_image %}<img src="{{ prediction.predicted_image.url }}" alt="AI detection result">{% else %}<div class="image-placeholder">Detection image unavailable</div>{% endif %}
+      </figure>
+      {% if prediction.heatmap_image %}
+        <figure>
+          <figcaption>EigenCAM visualisation</figcaption>
+          <img src="{{ prediction.heatmap_image.url }}" alt="EigenCAM disease visualisation">
+        </figure>
+      {% endif %}
+    </div>
+
+    <div class="disease-info-hub">
+      <div class="disease-info-heading">
+        <p class="eyebrow">Disease Guidance</p>
+        <h2>Disease Information</h2>
+        <p class="disease-info-subheading">Select a category below to explore in-depth details for <strong>{{ prediction.disease_display }}</strong>.</p>
+      </div>
+
+      <div class="disease-info-grid disease-nav-grid">
+        <a class="disease-nav-card" href="{% url 'result_symptoms' prediction.id %}">
+          <div class="card-content-wrapper">
+            <h3 class="card-title">Symptoms</h3>
+            <p class="card-description">View symptoms <span class="nav-arrow">→</span></p>
+          </div>
+        </a>
+
+        <a class="disease-nav-card" href="{% url 'result_cause' prediction.id %}">
+          <div class="card-content-wrapper">
+            <h3 class="card-title">Likely Cause</h3>
+            <p class="card-description">View cause <span class="nav-arrow">→</span></p>
+          </div>
+        </a>
+
+        <a class="disease-nav-card" href="{% url 'result_prevention' prediction.id %}">
+          <div class="card-content-wrapper">
+            <h3 class="card-title">Prevention</h3>
+            <p class="card-description">View prevention <span class="nav-arrow">→</span></p>
+          </div>
+        </a>
+
+        <a class="disease-nav-card" href="{% url 'result_treatment' prediction.id %}">
+          <div class="card-content-wrapper">
+            <h3 class="card-title">Treatment</h3>
+            <p class="card-description">View treatment <span class="nav-arrow">→</span></p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

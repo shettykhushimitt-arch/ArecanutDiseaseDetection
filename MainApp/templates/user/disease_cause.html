@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Likely Cause - {{ disease_name }} | ArecaCare{% endblock %}
+{% block content %}
+<section class="app-page">
+  <div class="container dedicated-info-container">
+    <a class="back-link" href="{% url 'result' prediction.id %}">← Back to Results</a>
+
+    <div class="dedicated-info-header">
+      <div class="dedicated-badge-pill">
+        <span class="badge-text">Likely Cause</span>
+      </div>
+      <h1 class="dedicated-disease-title">{{ disease_name }}</h1>
+    </div>
+
+    <div class="content-card dedicated-card">
+      <h2 class="card-section-title">Possible causes:</h2>
+      <ul class="disease-bullet-list">
+        {% for cause in causes %}
+          <li>{{ cause }}</li>
+        {% empty %}
+          <li>No cause information available for this condition.</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="dedicated-footer-nav">
+      <div class="back-nav-row">
+        <a class="button button-outline" href="{% url 'result' prediction.id %}">← Back to Results</a>
+      </div>
+      <div class="detail-navigation sibling-buttons">
+        <a class="button button-small button-outline" href="{% url 'result_symptoms' prediction.id %}">Symptoms →</a>
+        <a class="button button-small button-outline" href="{% url 'result_prevention' prediction.id %}">Prevention →</a>
+        <a class="button button-small button-outline" href="{% url 'result_treatment' prediction.id %}">Treatment →</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

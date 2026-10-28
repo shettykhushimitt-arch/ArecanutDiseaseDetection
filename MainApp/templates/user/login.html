@@ -1,0 +1,5 @@
+{% extends 'user/auth_shell.html' %}{% block title %}Sign in | ArecaCare{% endblock %}{% block auth_content %}
+<div class="form-intro"><p class="eyebrow">Welcome back</p><h2>Sign in to ArecaCare</h2><p>Continue monitoring your plantation.</p></div>
+{% if msg %}<div class="alert error">{{ msg }}</div>{% endif %}
+<form method="post" class="form-stack">{% csrf_token %}<label>Email address<input type="email" name="email" placeholder="you@example.com" required autocomplete="email"></label><label>Password<input type="password" name="password" placeholder="Enter your password" required autocomplete="current-password"></label><button class="button full" type="submit">Sign in <span>→</span></button></form><p class="form-footer">New to ArecaCare? <a href="{% url 'register' %}">Create an account</a></p>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Live camera scan | ArecaCare{% endblock %}
+{% block content %}
+<section class="app-page">
+  <div class="container">
+    <div class="page-heading compact">
+      <div>
+        <a class="back-link" href="{% url 'dashboard' %}">Back to dashboard</a>
+        <p class="eyebrow">Live camera scan</p>
+        <h1>Check a plant as you see it.</h1>
+        <p>Point your camera at one leaf, nut, bud, or trunk area. The AI analyzes one frame every two seconds.</p>
+      </div>
+      <a class="button button-outline" href="{% url 'upload' %}">Upload a saved image</a>
+    </div>
+
+    <form id="live-scan-form" data-endpoint="{% url 'live_predict' %}">
+      {% csrf_token %}
+      <div class="live-grid">
+        <section class="live-camera-card">
+          <div class="camera-stage">
+            <video id="live-video" autoplay playsinline muted></video>
+            <img id="live-annotation" alt="Latest AI detection" hidden>
+            <div class="plant-frame" aria-hidden="true"><span>Keep one plant area inside this guide</span></div>
+            <div id="camera-placeholder" class="camera-placeholder"><span>CAM</span><strong>Camera is off</strong><p>Start the camera to begin live analysis.</p></div>
+            <div class="live-badge"><i></i><span id="live-status">Ready to start</span></div>
+          </div>
+          <canvas id="live-canvas" hidden></canvas>
+          <div class="camera-controls">
+            <button id="start-camera" class="button" type="button">Start camera</button>
+            <button id="stop-camera" class="button button-outline" type="button" disabled>Stop camera</button>
+            <small>Frames are analyzed every 2 seconds and are not saved to history.</small>
+          </div>
+        </section>
+
+        <aside class="live-result-card" aria-live="polite">
+          <p class="eyebrow">Latest result</p>
+          <div id="live-empty" class="live-empty"><span>AI</span><h2>Waiting for camera</h2><p>Your current disease result and care guidance will appear here.</p></div>
+          <div id="live-result" hidden>
+            <div class="live-condition"><span id="live-icon">!</span><div><small>Detected condition</small><h2 id="live-disease">-</h2></div><strong id="live-confidence">0%</strong></div>
+            <div class="live-guidance"><article><h3>Symptoms</h3><p id="live-symptoms"></p></article><article><h3>Likely cause</h3><p id="live-causes"></p></article><article><h3 id="live-care-title">Prevention</h3><p id="live-prevention"></p></article><article><h3>Treatment</h3><p id="live-treatment"></p></article></div>
+          </div>
+        </aside>
+      </div>
+    </form>
+  </div>
+</section>
+{% endblock %}
